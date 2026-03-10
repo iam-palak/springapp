@@ -29,7 +29,7 @@ jobs:
         run: az acr login --name ${{  vars.AZURE_CONTAINER_REGISTRY_NAME  }}
       - name: Build and Push Docker Image
         run: |
-          docker build -t ${{  vars.AZURE_CONTAINER_REGISTRY_NAME  }}.azurecr.io/springbootapp:{{ github.sha }} .
+          docker build -t ${{  vars.AZURE_CONTAINER_REGISTRY_NAME  }}.azurecr.io/springbootapp:{{ github.sha }} "/Users/palaksingla/Documents/Learning/Springboot/dummy/Dockerfile"
           docker push ${{  vars.AZURE_CONTAINER_REGISTRY_NAME  }}.azurecr.io/springbootapp:{{ github.sha }}
   
 
