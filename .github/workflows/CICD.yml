@@ -2,13 +2,11 @@ name: CICD for Springboot Application
 
 on:
   push:
-    paths:
-      - "k8s/**"
+    branches:
       - main
   pull_request:
-    paths:
-      - "k8s/**"
-      -  main
+    branches:
+      - main
 
 jobs:
   Build:
