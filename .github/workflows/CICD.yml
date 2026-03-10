@@ -4,6 +4,11 @@ on:
   push:
     paths:
       - "k8s/**"
+      - main
+  pull_request:
+    paths:
+      - "k8s/**"
+      -  main
 
 jobs:
   Build:
