@@ -29,8 +29,8 @@ jobs:
         run: az acr login --name ${{  vars.AZURE_CONTAINER_REGISTRY_NAME  }}
       - name: Build and Push Docker Image
         run: |
-          docker build -t ${{  vars.AZURE_CONTAINER_REGISTRY_NAME  }}.azurecr.io/springbootapp:{{ github.sha }} "/Users/palaksingla/Documents/Learning/Springboot/dummy/Dockerfile"
-          docker push ${{  vars.AZURE_CONTAINER_REGISTRY_NAME  }}.azurecr.io/springbootapp:{{ github.sha }}
+          docker build -t ${{  vars.AZURE_CONTAINER_REGISTRY_NAME  }}.azurecr.io/springbootapp:${{ github.sha }} "/Users/palaksingla/Documents/Learning/Springboot/dummy/Dockerfile"
+          docker push ${{  vars.AZURE_CONTAINER_REGISTRY_NAME  }}.azurecr.io/springbootapp:${{ github.sha }}
   
 
   Deploy-to-Azure-Web-App:
@@ -47,7 +47,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{  vars.AZURE_APP_SERVICE_NAME  }}
-          images: ${{  vars.AZURE_CONTAINER_REGISTRY_NAME  }}.azurecr.io/springbootapp:{{ github.sha }}
+          images: ${{  vars.AZURE_CONTAINER_REGISTRY_NAME  }}.azurecr.io/springbootapp:${{ github.sha }}
           registry-url: ${{  vars.AZURE_CONTAINER_REGISTRY_NAME  }}.azurecr.io
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}

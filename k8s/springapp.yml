@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: springapp
-          image: AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/springbootapp:{{ github.sha }}
+          image: AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/springbootapp:${{ github.sha }}
           ports:
             - containerPort: 8082
 ---
