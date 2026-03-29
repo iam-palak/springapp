@@ -76,13 +76,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Create ECR Repository
-        uses: aws-actions/amazon-ecr-create-repository@v1
-        with:
-          repository: springbootapp
-          region: us-east-1
+      - name: ECR Login
+        run: aws ecr get-login-password --region us-east-1 | docker login --username AWS --password
 
       - name: Push to ECR
         run: |
+          aws ecr create-repository --repository-name springboot --region us-east-1
           docker tag my-app:${{ github.sha }} 523208255211.dkr.ecr.us-east-1.amazonaws.com/springbootapp:${{ github.sha }}
           docker push 523208255211.dkr.ecr.us-east-1.amazonaws.com/springbootapp:${{ github.sha }}
