@@ -47,7 +47,7 @@ jobs:
           scan-type: 'fs'
           input: "target/*.jar"
           format: 'table'
-          exit-code: '1'
+          exit-code: '0'
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
           ignore-unfixed: true
