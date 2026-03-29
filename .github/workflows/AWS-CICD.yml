@@ -52,4 +52,31 @@ jobs:
           severity: 'CRITICAL,HIGH'
           ignore-unfixed: true
       
-        
+  Image-Build-and-Push:
+    needs: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: "maven-artifact"
+
+      - name: Build Docker Image
+        run: |
+          docker build -t my-app:${{ github.sha }} .
+
+      - name: Login to AWS
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Push to ECR
+        run: |
+          aws ecr create-repository --repository-name springbootapp --region us-east-1 || true
+          docker tag my-app:${{ github.sha }} 523208255211.dkr.ecr.us-east-1.amazonaws.com/springbootapp:${{ github.sha }}
+          docker push 523208255211.dkr.ecr.us-east-1.amazonaws.com/springbootapp:${{ github.sha }}
