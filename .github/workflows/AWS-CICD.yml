@@ -21,10 +21,6 @@ jobs:
       - name: Build with Maven
         run: mvn clean install
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: "/target/*.jar"
 
   Test:
     needs: Build
