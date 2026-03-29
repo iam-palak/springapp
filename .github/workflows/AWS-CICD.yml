@@ -81,6 +81,6 @@ jobs:
 
       - name: Push to ECR
         run: |
-          aws ecr create-repository --repository-name springbootapp --region us-east-1 || true
-          docker tag my-app:${{ github.sha }} 523208255211.dkr.ecr.us-east-1.amazonaws.com/springbootapp:${{ github.sha }}
-          docker push 523208255211.dkr.ecr.us-east-1.amazonaws.com/springbootapp:${{ github.sha }}
+          aws ecr create-repository --repository-name spring-app --region us-east-1 || true
+          docker tag my-app:${{ github.sha }} 523208255211.dkr.ecr.us-east-1.amazonaws.com/spring-app:${{ github.sha }}
+          docker push 523208255211.dkr.ecr.us-east-1.amazonaws.com/spring-app:${{ github.sha }}
