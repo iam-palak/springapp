@@ -44,7 +44,8 @@ jobs:
       - name: Trivy Scan
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: "target/*.jar"
+          scan-type: 'fs'
+          input: "target/*.jar"
           format: 'table'
           exit-code: '1'
           vuln-type: 'os,library'
